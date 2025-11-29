@@ -14,13 +14,18 @@ export default function Client() {
     }
   };
 
+  const handleCodeChange = (e) => {
+    const value = e.target.value.replace(/\D/g, ""); // allow digits only
+    if (value.length <= 6) {
+      setCode(value);
+      setError("");
+    }
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-
     if (!code.trim()) return;
-
-    // Redirect to new audio page
-    navigate(`/audio?code=${code}`);
+    navigate(`/audio?code=${code}`); // NEW FILE implementation kept
   };
 
   return (

@@ -11,14 +11,15 @@
 
 .client-shell {
   width: 100%;
-  max-width: none;
-  margin: 100px 20px;
+  max-width: none;          /* matches Home .content-container */
+  margin: 0 auto;
+  /* no extra flex – let the .window fill this width */
 }
 
 /* Window – now identical to Landlord */
 .window {
   width: 100vw;
-  max-width: 2000px;
+  max-width: none;
   background: #000000e5;
   border: 1px solid #2b2b2b;
   border-radius: 15px;
