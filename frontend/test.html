@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Housr Viewing Companion</title>
+</head>
+<body>
+  <h1>Housr Viewing Companion</h1>
+
+  <label for="houseId">Select house:</label>
+  <select id="houseId"></select>
+  <button id="playBtn">Play Narration</button>
+
+  <audio id="audioPlayer" controls></audio>
+
+  <script>
+    const houseSelect = document.getElementById("houseId");
+    const playBtn = document.getElementById("playBtn");
+    const audioPlayer = document.getElementById("audioPlayer");
+
+    async function loadHouses() {
+      const res = await fetch("http://localhost:4000/api/houses");
+      const houses = await res.json();
+      houses.forEach(h => {
+        const opt = document.createElement("option");
+        opt.value = h.id;
+        opt.textContent = h.title;
+        houseSelect.appendChild(opt);
+      });
+    }
+
+    loadHouses();
+
+    playBtn.addEventListener("click", async () => {
+      const id = houseSelect.value;
+      if (!id) return alert("Select a house!");
+
+      const houseRes = await fetch(`http://localhost:4000/api/houses/${id}`);
+      const house = await houseRes.json();
+
+      const narration = `
+You are viewing ${house.title} at ${house.address}.
+Average bills: £${house.avgBills}.
+Landlord rating: ${house.landlordRating}.
+Pros: ${house.areaPros}.
+Cons: ${house.areaCons}.
+      `;
+
+      const audioRes = await fetch("http://localhost:4000/api/audio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ text: narration, voice: "21m00Tcm4TlvDq8ikWAM" })
+      });
+
+      if (!audioRes.ok) return alert("Failed to generate audio");
+
+      const audioData = await audioRes.arrayBuffer();
+      const blob = new Blob([audioData], { type: "audio/mpeg" });
+      audioPlayer.src = URL.createObjectURL(blob);
+      audioPlayer.play();
+    });
+  </script>
+</body>
+</html>
