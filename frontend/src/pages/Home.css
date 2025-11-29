@@ -41,6 +41,10 @@
   margin: 24px 0;
 }
 
+.button-row button:hover {
+  background: #3cff9a;
+}
+
 /* Macbook scales automatically */
 .macbook {
   flex: 1;
