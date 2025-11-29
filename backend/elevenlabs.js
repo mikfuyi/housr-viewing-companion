@@ -1,5 +1,4 @@
-// elevenlabs.js (CommonJS version)
-
+// elevenlabs.js
 const express = require("express");
 const axios = require("axios");
 const dotenv = require("dotenv");
@@ -8,6 +7,7 @@ dotenv.config();
 
 const router = express.Router();
 const ELEVEN_API_KEY = process.env.ELEVENLABS_API_KEY;
+const DEFAULT_VOICE = process.env.ELEVENLABS_DEFAULT_VOICE; 
 
 router.post("/", async (req, res) => {
     const { text, voice } = req.body;
@@ -16,19 +16,26 @@ router.post("/", async (req, res) => {
         return res.status(400).json({ error: "Missing text field." });
     }
 
+    const voiceId = voice || DEFAULT_VOICE;
+
+    if (!voiceId) {
+        return res.status(400).json({ error: "Missing voice ID." });
+    }
+
     try {
-        const url = `https://api.elevenlabs.io/v1/text-to-speech/${voice || "Rachel"}`;
+        const url = `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`;
 
         const response = await axios({
             method: "POST",
             url,
             data: {
                 text,
-                model_id: "eleven_monolingual_v1"
+                model_id: "eleven_multilingual_v2"
             },
             headers: {
                 "xi-api-key": ELEVEN_API_KEY,
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Accept": "audio/mpeg"
             },
             responseType: "arraybuffer"
         });
