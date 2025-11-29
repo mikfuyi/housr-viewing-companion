@@ -1,28 +1,28 @@
 .landlord-body {
-  background: #0e0f10;
+  background-image: url('../assets/nightcity.png');
   color: #e8e8e8;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;                    /* same as Home + Client */
+  padding: 0px;                    /* same as Home + Client */
   font-family: system-ui, sans-serif;
 }
 
 /* Same outer width feel as Home / Client */
 .landlord-shell {
   width: 100%;
-  max-width: 1800px;
-  margin: 0 auto;
+  max-width: none;          /* matches Home .content-container */
+  margin: 100 px 20px;   /* vertical margin for small viewports */
 }
 
 /* Window Frame - matches Client window */
 .window {
-  width: 100%;
+  width: 100vw;
   max-width: 2000px;
-  background: #111;
+  background: #000000e5;
   border: 1px solid #2b2b2b;
-  border-radius: 12px;
+  border-radius: 15px;
   box-shadow: 0px 0px 30px rgba(0,0,0,0.6);
   overflow: hidden;
 }
