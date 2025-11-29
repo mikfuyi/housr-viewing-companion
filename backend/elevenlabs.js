@@ -1,4 +1,4 @@
-// elevenlabs.js
+// backend/elevenlabs.js
 const express = require("express");
 const axios = require("axios");
 const dotenv = require("dotenv");
@@ -7,7 +7,7 @@ dotenv.config();
 
 const router = express.Router();
 const ELEVEN_API_KEY = process.env.ELEVENLABS_API_KEY;
-const DEFAULT_VOICE = process.env.ELEVENLABS_DEFAULT_VOICE; 
+const DEFAULT_VOICE = process.env.ELEVENLABS_DEFAULT_VOICE;
 
 router.post("/", async (req, res) => {
     const { text, voice } = req.body;
@@ -44,12 +44,28 @@ router.post("/", async (req, res) => {
 
         res.set({
             "Content-Type": "audio/mpeg",
-            "Content-Length": audio.length
+            "Content-Length": audio.length,
+            "Accept-Ranges": "bytes"
         });
 
         res.send(audio);
+
     } catch (error) {
-        console.error("ElevenLabs error:", error.response?.data || error.message);
+        // Robust error logging
+        if (error.response && error.response.data) {
+            let errData;
+            try {
+                // Parse the Buffer to JSON if possible
+                errData = JSON.parse(error.response.data.toString());
+            } catch (parseErr) {
+                // Fallback: raw string
+                errData = error.response.data.toString();
+            }
+            console.error("ElevenLabs API error:", errData);
+        } else {
+            console.error("ElevenLabs request error:", error.message);
+        }
+
         res.status(500).json({ error: "Failed to generate audio." });
     }
 });
