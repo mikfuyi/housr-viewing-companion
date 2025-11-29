@@ -1,0 +1,55 @@
+.home-body {
+  background: #0e0f10;
+  color: #e8e8e8;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  font-family: system-ui, sans-serif;
+}
+
+/* Main responsive container */
+.content-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  max-width: 1800px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* --- text section responsive --- */
+.hero-text {
+  flex: 1;
+  min-width: 300px;
+}
+.hero-text h1 { font-size: clamp(2rem, 5vw, 3.5rem); }
+.hero-text p { font-size: clamp(.9rem,1.1vw,1.1rem); }
+
+.tag {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* responsive button row */
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin: 24px 0;
+}
+
+/* Macbook scales automatically */
+.macbook {
+  flex: 1;
+  min-width: 350px;
+  max-width: 550px;
+}
+
+/* laptop UI auto-scales */
+.screen {
+  transform: scale( clamp(.70, 1.2vw, 1) );
+  transform-origin: top left;
+}

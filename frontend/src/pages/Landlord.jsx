@@ -1,12 +1,12 @@
 import { useState } from "react";
+import "./Landlord.css";
 
 export default function Landlord() {
   const [propertyInfo, setPropertyInfo] = useState("");
   const [propertyCode, setPropertyCode] = useState("");
 
-  // Generate a random unique 4-digit house code
   const generateCode = () => {
-    const code = Math.floor(1000 + Math.random() * 9000).toString();
+    const code = Math.floor(100000 + Math.random() * 900000).toString();
     setPropertyCode(code);
   };
 
@@ -33,60 +33,57 @@ export default function Landlord() {
   };
 
   return (
-    <div style={{ padding: "2rem" }}>
-      <h1>👨‍💼 Landlord Portal</h1>
-      <p>Upload property details & generate a client viewing access code.</p>
+    <div className="landlord-body">
+      <div className="landlord-shell">
+        <div className="window">
+          <div className="titlebar">
+            <p>Landlord Portal</p>
+          </div>
 
-      <form onSubmit={handleSubmit} style={{ marginTop: "2rem", maxWidth: "500px" }}>
+          <div className="inner">
+            <div className="header-row">
+              <div>
+                <h1>Upload Property Details</h1>
+                <p className="subtitle">
+                  Generate a 6-digit viewing code and store listing information
+                  securely.
+                </p>
+              </div>
+              <div className="icon-circle">🏠</div>
+            </div>
 
-        <label style={{ fontWeight: "bold" }}>Property Description</label>
-        <textarea
-          value={propertyInfo}
-          onChange={(e) => setPropertyInfo(e.target.value)}
-          placeholder="Enter home details, features, rent, neighbourhood info..."
-          rows={6}
-          style={{
-            width: "100%",
-            padding: "10px",
-            borderRadius: "5px",
-            marginTop: "0.5rem",
-            border: "1px solid #bbb"
-          }}
-        />
+            <form onSubmit={handleSubmit}>
+              <label>Property Description</label>
+              <textarea
+                value={propertyInfo}
+                onChange={(e) => setPropertyInfo(e.target.value)}
+                placeholder="Property features, pricing, neighbourhood info..."
+                rows={6}
+              />
 
-        <div style={{ marginTop: "1.5rem" }}>
-          <button
-            type="button"
-            onClick={generateCode}
-            style={{
-              padding: "10px 20px",
-              background: "black",
-              color: "white",
-              borderRadius: "6px"
-            }}
-          >
-            Generate 4-Digit Code
-          </button>
+              <div className="buttons">
+                <button
+                  type="button"
+                  className="generate-btn"
+                  onClick={generateCode}
+                >
+                  Generate 6-Digit Code
+                </button>
+
+                <button type="submit" className="save-btn">
+                  Save Property
+                </button>
+              </div>
+
+              {propertyCode && (
+                <div className="code-display">
+                  🔑 Viewing Code: <b>{propertyCode}</b>
+                </div>
+              )}
+            </form>
+          </div>
         </div>
-
-        {propertyCode && (
-          <h2 style={{ marginTop: "1rem" }}>🔑 Viewing Code: <b>{propertyCode}</b></h2>
-        )}
-
-        <button
-          type="submit"
-          style={{
-            marginTop: "1.5rem",
-            padding: "12px 25px",
-            background: "#007bff",
-            color: "white",
-            borderRadius: "6px",
-            fontSize: "16px"
-          }}
-        >
-          Save Property
-        </button>
-      </form>
+      </div>
     </div>
   );
 }
