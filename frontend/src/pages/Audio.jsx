@@ -1,5 +1,6 @@
 // src/pages/Audio.jsx
 import { useEffect, useState, useRef } from "react";
+import './Audio.css';
 
 export default function Audio() {
   const [houses, setHouses] = useState([]);

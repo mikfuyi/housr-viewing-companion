@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./Client.css";
 
 export default function Client() {
   const [code, setCode] = useState("");
