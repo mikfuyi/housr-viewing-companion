@@ -1,116 +1,32 @@
 import { useState } from "react";
-import "./Client.css";
+import { useNavigate } from "react-router-dom";
 
-function Client() {
+export default function Client() {
   const [code, setCode] = useState("");
-  const [error, setError] = useState("");
-
-  const handleCodeChange = (e) => {
-    const value = e.target.value.replace(/\D/g, ""); // digits only
-    if (value.length <= 6) {
-      setCode(value);
-      setError("");
-    }
-  };
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (code.length !== 6) {
-      setError("Please enter a complete 6-digit code");
-      return;
-    }
+    if (!code.trim()) return;
 
-    // Redirect to audio page with the code
-    window.location.href = `/audio?code=${code}`;
+    // Redirect to new audio page
+    navigate(`/audio?code=${code}`);
   };
 
   return (
-    <div className="client-body">
-      <div className="client-shell">
-        <div className="window">
-          <div className="titlebar">
-            <p>Client Viewer</p>
-          </div>
+    <div className="client-page">
+      <h1>Enter Home Code</h1>
 
-          <div className="inner">
-            <div className="header-row">
-              <div>
-                <h1>Enter Property Code</h1>
-                <p className="subtitle">
-                  Enter the 6-digit code provided at the property to start your
-                  audio-guided viewing.
-                </p>
-              </div>
-              <div className="icon-circle">🔊</div>
-            </div>
-
-            <form onSubmit={handleSubmit} className="form">
-              <label>6-digit viewing code</label>
-              <input
-                type="text"
-                inputMode="numeric"
-                maxLength={6}
-                value={code}
-                onChange={handleCodeChange}
-                placeholder="000000"
-                className="code-input"
-                autoFocus
-              />
-              <p className="digit-count">{code.length}/6 digits</p>
-
-              {error && <div className="error-box">{error}</div>}
-
-              <button
-                type="submit"
-                className={`start-btn ${
-                  code.length === 6 ? "active" : "disabled"
-                }`}
-                disabled={code.length !== 6}
-              >
-                Start Viewing Tour
-              </button>
-            </form>
-
-            <div className="features">
-              <p className="features-title">What you’ll get during the tour</p>
-              <div className="feature-grid">
-                <div className="feature-card">
-                  <div className="feature-emoji">📊</div>
-                  <div className="feature-heading">Property Breakdown</div>
-                  <div className="feature-text">
-                    Bills, energy rating & key details.
-                  </div>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-emoji">🏘️</div>
-                  <div className="feature-heading">Area Insights</div>
-                  <div className="feature-text">
-                    Safety, transport & amenities nearby.
-                  </div>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-emoji">🎯</div>
-                  <div className="feature-heading">Personalized</div>
-                  <div className="feature-text">
-                    Answers tuned to what you care about.
-                  </div>
-                </div>
-                <div className="feature-card">
-                  <div className="feature-emoji">🎙️</div>
-                  <div className="feature-heading">Live Audio Guide</div>
-                  <div className="feature-text">
-                    Ask questions as you walk the property.
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Enter the house code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <button type="submit">View Home Audio Guide</button>
+      </form>
     </div>
   );
 }
-
-export default Client;
