@@ -1,48 +1,58 @@
 import { Link } from "react-router-dom";
+import "./Home.css"; // IMPORTANT
 
 export default function Home() {
   return (
-    <div style={{ padding: "2rem", textAlign: "center" }}>
-      <h1>🏠 Housr Viewing Companion</h1>
-      <p style={{ marginBottom: "2rem" }}>
-        Smart voice-guided property tours with real insights while you walk.
-      </p>
+    <div className="home-body">
 
-      <div style={{ display: "flex", justifyContent: "center", gap: "1.5rem" }}>
+      <div className="content-container">
 
-        <Link to="/landlord">
-          <button
-            style={{
-              padding: "1rem 2rem",
-              fontSize: "1.1rem",
-              borderRadius: "8px",
-              border: "none",
-              cursor: "pointer",
-              background: "#2e86ff",
-              color: "white",
-              fontWeight: "600"
-            }}
-          >
-            👤 I am a Landlord
-          </button>
-        </Link>
+        {/* Left Section */}
+        <div className="hero-text">
+          <span className="tag">AI-Guided Property Viewings</span>
 
-        <Link to="/client">
-          <button
-            style={{
-              padding: "1rem 2rem",
-              fontSize: "1.1rem",
-              borderRadius: "8px",
-              border: "none",
-              cursor: "pointer",
-              background: "#28c76f",
-              color: "white",
-              fontWeight: "600"
-            }}
-          >
-            🔊 I am Viewing a Property
-          </button>
-        </Link>
+          <h1>Housr Viewing Companion</h1>
+          <p>
+            A smarter desktop companion for viewing properties. 
+            Landlords upload details once. Viewers arrive, enter a code, 
+            and get a guided room-by-room walkthrough.
+          </p>
+
+          <div className="button-row">
+            <Link to="/landlord"><button className="primary-btn">Landlord Portal →</button></Link>
+            <Link to="/client"><button className="secondary-btn">Client Viewer ▶</button></Link>
+          </div>
+
+          <p className="sub-text">No install. No app. Just a code.</p>
+        </div>
+
+        {/* Right Side: Macbook Mock Screen */}
+        <div className="macbook">
+          <div className="screen">
+            <div className="top-bar">
+            </div>
+
+            <div className="screen-content">
+              <h3>Viewing Overview</h3>
+              <p className="addr">24B Claremont Road</p>
+              <p className="time">Live Tour · 12:30</p>
+
+              <div className="cards">
+                <div className="card">
+                  <h4>Landlord</h4>
+                  <p>Upload & generate viewing code instantly.</p>
+                </div>
+                <div className="card">
+                  <h4>Client</h4>
+                  <p>Join tour with code — guided walkthrough.</p>
+                </div>
+              </div>
+
+              <div className="footer-card">Start Client Session ⬤ Desktop Companion</div>
+            </div>
+          </div>
+          <div className="base"></div>
+        </div>
 
       </div>
     </div>
