@@ -1,34 +1,32 @@
 .client-body {
-  background: #0e0f10;
+  background-image: url('../assets/nightcity.png');
   color: #e8e8e8;
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 0px;              /* same feel as Home */
+  padding: 0px;
   font-family: system-ui, sans-serif;
 }
 
 .client-shell {
   width: 100%;
-  max-width: none;          /* matches Home .content-container */
-  margin: 100;
-  /* no extra flex – let the .window fill this width */
+  max-width: none;
+  margin: 100px 20px;
 }
 
-
-/* Mac-style window */
+/* Window – now identical to Landlord */
 .window {
   width: 100vw;
-  max-width: none;
-  background: #111;
+  max-width: 2000px;
+  background: #000000e5;
   border: 1px solid #2b2b2b;
   border-radius: 15px;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.6);
   overflow: hidden;
 }
 
-/* Title bar */
+/* Title Bar – identical */
 .titlebar {
   background: #1c1c1c;
   padding: 10px;
@@ -49,25 +47,19 @@
   height: 11px;
   border-radius: 50%;
 }
-.red {
-  background: #ff5f57;
-}
-.yellow {
-  background: #ffbd2e;
-}
-.green {
-  background: #28c840;
-}
+.red { background: #ff5f57; }
+.yellow { background: #ffbd2e; }
+.green { background: #28c840; }
 
-/* Inner content */
+/* Inner container */
 .inner {
   padding: 28px 28px 30px;
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
 }
 
-/* Header row */
+/* Header Row */
 .header-row {
   display: flex;
   align-items: center;
@@ -98,7 +90,7 @@ h1 {
   font-size: 1.4rem;
 }
 
-/* Form */
+/* Form Labels */
 .form label {
   font-size: 0.9rem;
   font-weight: 600;
@@ -106,10 +98,10 @@ h1 {
   display: block;
 }
 
+/* Input */
 .code-input {
   width: 100%;
   max-width: 400px;
-  margin: 0 auto;
   background: #181818;
   border: 1px solid #2a2a2a;
   color: #e8e8e8;
@@ -132,7 +124,7 @@ h1 {
   margin-bottom: 14px;
 }
 
-/* Error */
+/* Error Box */
 .error-box {
   background: #3b1114;
   border: 1px solid #ff4c5b;
@@ -144,7 +136,7 @@ h1 {
   margin-bottom: 14px;
 }
 
-/* Button */
+/* Button – styled same as Landlord’s CTA buttons */
 .start-btn {
   width: 100%;
   padding: 12px 20px;
@@ -154,18 +146,17 @@ h1 {
   font-size: 1rem;
   cursor: pointer;
   transition: 0.25s;
-  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+  box-shadow: 0 0 0 rgba(0,0,0,0);
 }
 
 .start-btn.active {
   background: #3cff9a;
   color: #000;
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.4);
 }
 
 .start-btn.active:hover {
   background: #00e86a;
-  transform: translateY(-1px);
 }
 
 .start-btn.disabled {
@@ -174,7 +165,7 @@ h1 {
   cursor: not-allowed;
 }
 
-/* Features section */
+/* Feature Grid */
 .features {
   margin-top: 26px;
 }
@@ -194,8 +185,8 @@ h1 {
 
 .feature-card {
   background: #181818;
-  border-radius: 8px;
   border: 1px solid #262626;
+  border-radius: 8px;
   padding: 10px;
   text-align: center;
   font-size: 0.8rem;
@@ -212,5 +203,16 @@ h1 {
 }
 
 .feature-text {
-  color: #a8a8a8
+  color: #a8a8a8;
+}
+
+/* Mobile responsiveness – same patterns as Landlord */
+@media (max-width: 768px) {
+  .client-body {
+    padding: 24px 16px;
+  }
+
+  .inner {
+    padding: 22px 18px 24px;
+  }
 }

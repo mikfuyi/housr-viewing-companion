@@ -1,5 +1,6 @@
 // src/pages/Audio.jsx
 import { useEffect, useState, useRef } from "react";
+import "./Audio.css";
 
 export default function Audio() {
   const [houses, setHouses] = useState([]);
@@ -106,50 +107,76 @@ Cons: ${house.areaCons}.
     }
   };
 
-  return (
-    <div className="audio-page">
-      <h1>Housr Viewing Companion</h1>
+return (
+  <div className="audio-body">
+    <div className="audio-shell">
+      <div className="audio-window">
 
-      <div className="audio-controls">
-        <label htmlFor="houseId">Select house:</label>
-        <select
-          id="houseId"
-          value={selectedId}
-          onChange={(e) => setSelectedId(e.target.value)}
-          disabled={isLoadingHouses || houses.length === 0}
-        >
-          {houses.length === 0 && (
-            <option value="">No houses available</option>
-          )}
-          {houses.map((h) => (
-            <option key={h.id} value={h.id}>
-              {h.title}
-            </option>
-          ))}
-        </select>
+        {/* Titlebar */}
+        <div className="audio-titlebar">
+          <div className="dot red"></div>
+          <div className="dot yellow"></div>
+          <div className="dot green"></div>
+          <p>Audio Viewer</p>
+        </div>
 
-        <button
-          id="playBtn"
-          onClick={handlePlayClick}
-          disabled={
-            !selectedId || isGeneratingAudio || isLoadingHouses || !houses.length
-          }
-        >
-          {isGeneratingAudio ? "Generating..." : "Play Narration"}
-        </button>
+        {/* Inner content */}
+        <div className="audio-inner">
+
+          <h1>Housr Viewing Companion</h1>
+          <p className="audio-subtitle">
+            Listen to your generated audio tour.
+          </p>
+
+          {/* --- Your ORIGINAL CONTENT goes here --- */}
+
+          <div className="audio-controls">
+            <label htmlFor="houseId">Select house:</label>
+            <select
+              id="houseId"
+              value={selectedId}
+              onChange={(e) => setSelectedId(e.target.value)}
+              disabled={isLoadingHouses || houses.length === 0}
+            >
+              {houses.length === 0 && (
+                <option value="">No houses available</option>
+              )}
+              {houses.map((h) => (
+                <option key={h.id} value={h.id}>
+                  {h.title}
+                </option>
+              ))}
+            </select>
+
+            <button
+              id="playBtn"
+              onClick={handlePlayClick}
+              disabled={
+                !selectedId ||
+                isGeneratingAudio ||
+                isLoadingHouses ||
+                !houses.length
+              }
+            >
+              {isGeneratingAudio ? "Generating..." : "Play Narration"}
+            </button>
+          </div>
+
+          {error && <p className="audio-error">{error}</p>}
+
+          <audio
+            id="audioPlayer"
+            ref={audioRef}
+            controls
+            style={{ marginTop: "1rem", width: "100%" }}
+          >
+            {audioUrl && <source src={audioUrl} type="audio/mpeg" />}
+            Your browser does not support the audio element.
+          </audio>
+
+        </div>
       </div>
-
-      {error && <p className="audio-error">{error}</p>}
-
-      <audio
-        id="audioPlayer"
-        ref={audioRef}
-        controls
-        style={{ marginTop: "1rem", width: "100%" }}
-      >
-        {audioUrl && <source src={audioUrl} type="audio/mpeg" />}
-        Your browser does not support the audio element.
-      </audio>
     </div>
-  );
+  </div>
+);
 }
