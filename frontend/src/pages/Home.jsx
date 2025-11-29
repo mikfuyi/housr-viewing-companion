@@ -27,7 +27,7 @@ export default function Home() {
           </button>
         </Link>
 
-        <Link to="/viewer">
+        <Link to="/client">
           <button
             style={{
               padding: "1rem 2rem",
