@@ -15,6 +15,8 @@ app.get("/health", (req, res) => {
   res.json({ status: "ok", time: new Date().toISOString() });
 });
 
+const housesRouter = require("./routes/houses");
+app.use("/api/houses", housesRouter);
 
 
 const PORT = process.env.PORT || 4000;
