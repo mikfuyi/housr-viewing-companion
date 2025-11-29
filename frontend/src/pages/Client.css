@@ -12,7 +12,7 @@
 .client-shell {
   width: 100%;
   max-width: none;          /* matches Home .content-container */
-  margin: 0 auto;
+  margin: 100;
   /* no extra flex – let the .window fill this width */
 }
 
@@ -20,7 +20,7 @@
 /* Mac-style window */
 .window {
   width: 100vw;
-  max-width: 1500px;
+  max-width: none;
   background: #111;
   border: 1px solid #2b2b2b;
   border-radius: 15px;
